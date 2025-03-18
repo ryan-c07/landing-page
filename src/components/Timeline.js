@@ -11,7 +11,7 @@ const TimelineEvent = ({ date, title, subtitle, description, year, links, isLong
   return (
     <motion.div
       ref={ref}
-      className={`relative ${isLongTerm ? 'min-h-[400px]' : 'min-h-[300px]'}`}
+      className={`relative ${isLongTerm ? 'min-h-[300px] sm:min-h-[400px]' : 'min-h-[250px] sm:min-h-[300px]'}`}
     >
       {/* Event marker */}
       <motion.div
@@ -26,17 +26,17 @@ const TimelineEvent = ({ date, title, subtitle, description, year, links, isLong
       />
 
       {/* Event content */}
-      <div className="ml-6">
+      <div className="ml-4 sm:ml-6">
         <motion.div
           className="bg-black border rounded-lg overflow-hidden"
           initial={{ 
-            width: '16rem',
+            width: '100%',
             opacity: 0,
             y: 20,
             borderColor: 'rgba(234, 179, 8, 0.2)'
           }}
           animate={isInView ? {
-            width: '32rem',
+            width: '100%',
             opacity: 1,
             y: 0,
             borderColor: 'rgb(234, 179, 8)'
@@ -46,17 +46,20 @@ const TimelineEvent = ({ date, title, subtitle, description, year, links, isLong
             delay: 0.2,
             ease: [0.4, 0, 0.2, 1]
           }}
+          style={{
+            maxWidth: 'min(32rem, 90vw)'
+          }}
         >
           <motion.div 
-            className="p-6"
+            className="p-4 sm:p-6"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.3, delay: 0.4 }}
           >
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="text-sm font-medium text-yellow-500">{date}</h3>
-                <h4 className="text-lg font-semibold text-white mt-1">{title}</h4>
+                <h3 className="text-xs sm:text-sm font-medium text-yellow-500">{date}</h3>
+                <h4 className="text-base sm:text-lg font-semibold text-white mt-1">{title}</h4>
               </div>
             </div>
 
@@ -66,12 +69,12 @@ const TimelineEvent = ({ date, title, subtitle, description, year, links, isLong
               transition={{ duration: 0.4, delay: 0.5 }}
               className="mt-4"
             >
-              <p className="text-base text-white/60 mb-4">{subtitle}</p>
+              <p className="text-sm sm:text-base text-white/60 mb-4">{subtitle}</p>
               <ul className="space-y-2">
                 {description.map((item, index) => (
                   <motion.li
                     key={index}
-                    className="text-base text-white/80 flex items-start"
+                    className="text-sm sm:text-base text-white/80 flex items-start"
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
@@ -83,7 +86,7 @@ const TimelineEvent = ({ date, title, subtitle, description, year, links, isLong
               </ul>
               {links && (
                 <motion.div
-                  className="mt-4 flex gap-4"
+                  className="mt-4 flex flex-wrap gap-4"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.3, delay: 0.8 }}
@@ -94,7 +97,7 @@ const TimelineEvent = ({ date, title, subtitle, description, year, links, isLong
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-yellow-500 hover:text-yellow-400 transition-colors"
+                      className="text-sm sm:text-base text-yellow-500 hover:text-yellow-400 transition-colors"
                     >
                       {link.label}
                     </a>

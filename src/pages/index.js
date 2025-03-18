@@ -119,28 +119,28 @@ export default function Home() {
         {/* Hero Section */}
         <motion.section
           variants={staggerContainer}
-          className="py-20 sm:py-24"
+          className="py-12 sm:py-20 lg:py-24"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div
               variants={staggerContainer}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8 order-2 lg:order-1"
             >
               <motion.h1
                 variants={fadeInUp}
-                className="text-4xl sm:text-5xl font-bold tracking-tight"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
               >
                 Hi, I'm Ryan Chen
                 <motion.span
                   variants={fadeInUp}
-                  className="block text-yellow-500"
+                  className="block text-yellow-500 mt-2"
                 >
                   Software Engineer
                 </motion.span>
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="text-xl text-white/80"
+                className="text-lg sm:text-xl text-white/80"
               >
                 Specializing in AI, ML, and full-stack development. Passionate about building innovative solutions and exploring the frontiers of artificial intelligence.
               </motion.p>
@@ -151,7 +151,7 @@ export default function Home() {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href="/projects"
-                    className="inline-flex items-center justify-center px-6 py-3 border border-yellow-500 text-base font-medium rounded-md text-yellow-500 bg-transparent hover:bg-yellow-500 hover:text-black transition-colors"
+                    className="inline-flex items-center justify-center px-6 py-3 border border-yellow-500 text-base font-medium rounded-md text-yellow-500 bg-transparent hover:bg-yellow-500 hover:text-black transition-colors w-full sm:w-auto"
                   >
                     View My Work
                   </Link>
@@ -161,7 +161,7 @@ export default function Home() {
                     href="https://drive.google.com/file/d/1XI1IDOiqZwFMa5mPpvDlmtYtHmZMa5V7/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-6 py-3 border border-yellow-500/20 text-base font-medium rounded-md text-white bg-black hover:border-yellow-500 hover:text-yellow-500 transition-colors"
+                    className="inline-flex items-center justify-center px-6 py-3 border border-yellow-500/20 text-base font-medium rounded-md text-white bg-black hover:border-yellow-500 hover:text-yellow-500 transition-colors w-full sm:w-auto"
                   >
                     View Resume
                   </a>
@@ -170,10 +170,11 @@ export default function Home() {
             </motion.div>
             <motion.div
               variants={scaleIn}
-              className="relative w-full rounded-lg overflow-hidden pt-12"
+              className="relative w-full rounded-lg overflow-hidden order-1 lg:order-2"
               style={{ 
-                height: 'calc((827/565) * 100%)',
-                minHeight: '500px'
+                aspectRatio: '565/827',
+                maxWidth: '100%',
+                maxHeight: '600px'
               }}
             >
               {/* Profile Image */}
@@ -184,7 +185,7 @@ export default function Home() {
                   fill
                   className="object-cover rounded-lg"
                   priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {/* Gradient Overlay */}
                 <motion.div
@@ -209,11 +210,11 @@ export default function Home() {
         {/* Skills Section */}
         <motion.section
           variants={fadeInUp}
-          className="py-16"
+          className="py-12 sm:py-16"
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-3xl font-bold mb-8 text-center"
+            className="text-2xl sm:text-3xl font-bold mb-8 text-center"
           >
             Skills & Technologies
           </motion.h2>
@@ -223,24 +224,24 @@ export default function Home() {
         {/* Featured Projects */}
         <motion.section
           variants={fadeInUp}
-          className="py-16"
+          className="py-12 sm:py-16"
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-3xl font-bold mb-8"
+            className="text-2xl sm:text-3xl font-bold mb-8"
           >
             Featured Projects
           </motion.h2>
           <motion.div
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           >
             {projects.map((project) => (
               <motion.div
                 key={project.title}
                 variants={fadeInUp}
                 whileHover={{ y: -10 }}
-                className="bg-black border border-yellow-500/20 rounded-lg overflow-hidden"
+                className="bg-black border border-yellow-500/20 rounded-lg overflow-hidden h-full"
               >
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-3 text-yellow-500">{project.title}</h3>
@@ -249,24 +250,33 @@ export default function Home() {
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs border border-yellow-500/20 rounded-full text-yellow-500"
+                        className="px-2 py-1 text-sm rounded-full bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-4">
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-yellow-500 transition-colors"
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-yellow-500 hover:text-yellow-400 transition-colors"
+                  >
+                    View on GitHub
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      View on GitHub
-                    </motion.a> 
-                  </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
                 </div>
               </motion.div>
             ))}

@@ -1,22 +1,129 @@
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faPython, faJs, faSwift, faJava, faReact, 
+  faNodeJs, faAndroid 
+} from '@fortawesome/free-brands-svg-icons';
+import { faDatabase, faTerminal, faBrain } from '@fortawesome/free-solid-svg-icons';
 
-const skillDescriptions = {
-  'Python': 'Machine Learning & Data Analysis',
-  'JavaScript': 'Frontend Development & Interactive UIs',
-  'TypeScript': 'Type-safe Application Development',
-  'React': 'Building Modern Web Applications',
-  'Next.js': 'Server-side Rendering & Static Sites',
-  'Node.js': 'Backend API Development',
-  'Machine Learning': 'AI Model Development & Training',
-  'TensorFlow': 'Deep Learning & Neural Networks',
-  'PyTorch': 'Research & Computer Vision',
-  'AWS': 'Cloud Infrastructure & Deployment',
-  'Docker': 'Containerization & DevOps',
-  'Git': 'Version Control & Collaboration'
+const skills = [
+  {
+    name: 'Python',
+    description: 'Primary language for AI/ML development, data analysis, and automation. Experience with frameworks like TensorFlow and scientific computing libraries.',
+    icon: faPython,
+    color: '#3776AB'
+  },
+  {
+    name: 'JavaScript',
+    description: 'Core language for web development, used extensively in building interactive front-end applications and Node.js backend services.',
+    icon: faJs,
+    color: '#F7DF1E'
+  },
+  {
+    name: 'TypeScript',
+    description: 'Utilized for building type-safe, scalable applications. Enhanced JavaScript development with static typing and modern ECMAScript features.',
+    icon: faJs,
+    color: '#3178C6'
+  },
+  {
+    name: 'Swift',
+    description: 'iOS app development language, used for creating native mobile applications with a focus on performance and user experience.',
+    icon: faSwift,
+    color: '#F05138'
+  },
+  {
+    name: 'Java',
+    description: 'Object-oriented programming for Android development and backend services. Experience with Spring Boot and Android SDK.',
+    icon: faJava,
+    color: '#007396'
+  },
+  {
+    name: 'React.js',
+    description: 'Modern front-end library for building user interfaces, with expertise in hooks, context API, and state management.',
+    icon: faReact,
+    color: '#61DAFB'
+  },
+  {
+    name: 'SQL',
+    description: 'Database management and querying, experienced with PostgreSQL and MySQL for data modeling and complex queries.',
+    icon: faDatabase,
+    color: '#336791'
+  },
+  {
+    name: 'Node.js',
+    description: 'Server-side JavaScript runtime, used for building scalable backend services and RESTful APIs.',
+    icon: faNodeJs,
+    color: '#339933'
+  },
+  {
+    name: 'Bash',
+    description: 'Shell scripting for automation, deployment processes, and system administration tasks.',
+    icon: faTerminal,
+    color: '#4EAA25'
+  },
+  {
+    name: 'OpenAI API',
+    description: 'Integration of AI capabilities into applications, including natural language processing and content generation.',
+    icon: faBrain,
+    color: '#412991'
+  },
+  {
+    name: 'Android Studio',
+    description: 'IDE for Android app development, proficient in UI design, debugging, and app performance optimization.',
+    icon: faAndroid,
+    color: '#3DDC84'
+  }
+];
+
+// Mobile SkillCard Component
+const SkillCard = ({ skill, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        className="flex items-center space-x-3 p-4 bg-black border border-yellow-500/20 rounded-lg cursor-pointer"
+        style={{
+          borderColor: isHovered ? skill.color : 'rgba(234, 179, 8, 0.2)'
+        }}
+      >
+        <FontAwesomeIcon 
+          icon={skill.icon} 
+          className="w-6 h-6"
+          style={{ color: skill.color }}
+        />
+        <span className="text-white font-medium">{skill.name}</span>
+      </motion.div>
+
+      {isHovered && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          className="absolute z-10 w-64 p-4 mt-2 bg-black border border-yellow-500/20 rounded-lg shadow-xl"
+          style={{
+            left: '50%',
+            transform: 'translateX(-50%)',
+            top: '100%'
+          }}
+        >
+          <p className="text-sm text-white/80">{skill.description}</p>
+        </motion.div>
+      )}
+    </motion.div>
+  );
 };
 
+// Desktop Neural Network Components
 const SkillNode = ({ skill, position, connections, isActive, onHover, index, totalSkills, containerInView }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -69,7 +176,6 @@ const SkillNode = ({ skill, position, connections, isActive, onHover, index, tot
         }
       } : {}}
     >
-      {/* Connection lines */}
       {isInView && connections.map((connection, idx) => (
         <motion.div
           key={idx}
@@ -93,13 +199,11 @@ const SkillNode = ({ skill, position, connections, isActive, onHover, index, tot
         />
       ))}
 
-      {/* Skill node */}
       <motion.div
         className="relative"
         onMouseEnter={() => onHover(skill)}
         onMouseLeave={() => onHover(null)}
       >
-        {/* Outer pulse ring */}
         <motion.div
           className="absolute inset-0 rounded-full"
           style={{ backgroundColor: skill.color }}
@@ -114,7 +218,6 @@ const SkillNode = ({ skill, position, connections, isActive, onHover, index, tot
           }}
         />
 
-        {/* Icon container */}
         <motion.div
           className="relative z-10 p-4 rounded-full bg-black border-2"
           style={{ 
@@ -130,7 +233,6 @@ const SkillNode = ({ skill, position, connections, isActive, onHover, index, tot
   );
 };
 
-// Side description component
 const SideDescription = ({ skill }) => (
   <div className="absolute right-0 top-0 w-72 h-full flex items-center">
     <AnimatePresence mode="wait">
@@ -161,13 +263,12 @@ const SideDescription = ({ skill }) => (
   </div>
 );
 
-export default function NeuralSkills({ skills }) {
+const NeuralSkills = ({ skills }) => {
   const containerRef = useRef(null);
   const [positions, setPositions] = useState([]);
   const [connections, setConnections] = useState([]);
   const [activeSkill, setActiveSkill] = useState(null);
   
-  // Single useInView for the entire container
   const containerInView = useInView(containerRef, {
     once: true,
     margin: "-20% 0px"
@@ -176,13 +277,12 @@ export default function NeuralSkills({ skills }) {
   const calculatePositions = () => {
     if (!containerRef.current) return;
 
-    const width = containerRef.current.offsetWidth - 288; // Subtract side panel width
+    const width = containerRef.current.offsetWidth - 288;
     const height = containerRef.current.offsetHeight;
     const centerX = width / 2;
     const centerY = height / 2;
     const radius = Math.min(width, height) / 3;
 
-    // Calculate positions in a circular pattern
     const newPositions = skills.map((_, index) => {
       const angle = (index / skills.length) * Math.PI * 2;
       const x = centerX + radius * Math.cos(angle);
@@ -190,7 +290,6 @@ export default function NeuralSkills({ skills }) {
       return { x, y };
     });
 
-    // Calculate connections between nodes
     const newConnections = newPositions.map((pos1, i) => {
       const nodeConnections = [];
       newPositions.forEach((pos2, j) => {
@@ -223,7 +322,6 @@ export default function NeuralSkills({ skills }) {
       ref={containerRef}
       className="relative w-full h-[600px] flex"
     >
-      {/* Main network container */}
       <div className="flex-1 relative">
         {skills.map((skill, index) => (
           <SkillNode
@@ -239,9 +337,38 @@ export default function NeuralSkills({ skills }) {
           />
         ))}
       </div>
-
-      {/* Side description panel */}
       <SideDescription skill={activeSkill} />
     </div>
   );
-} 
+};
+
+// Main AnimatedSkills component with responsive layout
+const AnimatedSkills = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // Switch to mobile layout below 1024px
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <>
+      {isMobile ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {skills.map((skill, index) => (
+            <SkillCard key={skill.name} skill={skill} index={index} />
+          ))}
+        </div>
+      ) : (
+        <NeuralSkills skills={skills} />
+      )}
+    </>
+  );
+};
+
+export default AnimatedSkills; 

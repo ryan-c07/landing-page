@@ -4,87 +4,6 @@ import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import AnimatedSkills from "../components/AnimatedSkills";
 import { fadeInUp, fadeIn, staggerContainer, scaleIn } from "../utils/animations";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faPython, faJs, faSwift, faJava, faReact, 
-  faNodeJs, faAndroid 
-} from '@fortawesome/free-brands-svg-icons';
-import { faDatabase, faTerminal, faBrain } from '@fortawesome/free-solid-svg-icons';
-
-const skills = [
-  {
-    name: 'Python',
-    description: 'Primary language for AI/ML development, data analysis, and automation. Experience with frameworks like TensorFlow and scientific computing libraries.',
-    icon: faPython,
-    color: '#3776AB'
-  },
-  {
-    name: 'JavaScript',
-    description: 'Core language for web development, used extensively in building interactive front-end applications and Node.js backend services.',
-    icon: faJs,
-    color: '#F7DF1E'
-  },
-  {
-    name: 'TypeScript',
-    description: 'Utilized for building type-safe, scalable applications. Enhanced JavaScript development with static typing and modern ECMAScript features.',
-    icon: faJs, // Using JS icon as fallback
-    color: '#3178C6'
-  },
-  {
-    name: 'Swift',
-    description: 'iOS app development language, used for creating native mobile applications with a focus on performance and user experience.',
-    icon: faSwift,
-    color: '#F05138'
-  },
-  {
-    name: 'Java',
-    description: 'Object-oriented programming for Android development and backend services. Experience with Spring Boot and Android SDK.',
-    icon: faJava,
-    color: '#007396'
-  },
-  {
-    name: 'React.js',
-    description: 'Modern front-end library for building user interfaces, with expertise in hooks, context API, and state management.',
-    icon: faReact,
-    color: '#61DAFB'
-  },
-  {
-    name: 'SQL',
-    description: 'Database management and querying, experienced with PostgreSQL and MySQL for data modeling and complex queries.',
-    icon: faDatabase,
-    color: '#336791'
-  },
-  {
-    name: 'Node.js',
-    description: 'Server-side JavaScript runtime, used for building scalable backend services and RESTful APIs.',
-    icon: faNodeJs,
-    color: '#339933'
-  },
-  {
-    name: 'Bash',
-    description: 'Shell scripting for automation, deployment processes, and system administration tasks.',
-    icon: faTerminal,
-    color: '#4EAA25'
-  },
-  {
-    name: 'Kotlin',
-    description: 'Modern Android development language, offering improved syntax and features over Java for mobile app development.',
-    icon: faJava, // Using Java icon as fallback
-    color: '#7F52FF'
-  },
-  {
-    name: 'OpenAI API',
-    description: 'Integration of AI capabilities into applications, including natural language processing and content generation.',
-    icon: faBrain,
-    color: '#412991'
-  },
-  {
-    name: 'Android Studio',
-    description: 'IDE for Android app development, proficient in UI design, debugging, and app performance optimization.',
-    icon: faAndroid,
-    color: '#3DDC84'
-  }
-];
 
 const projects = [
   {
@@ -95,7 +14,7 @@ const projects = [
   },
   {
     title: "Nue-Trivia",
-    description: "An educational game designed to teach young audiences about nutrition through interactive trivia. Features custom-made sprites, AI-generated questions, and an engaging point system to make learning about healthy eating fun and accessible.",    technologies: ["React", "OpenAI API", "Node.js"],
+    description: "An educational game designed to teach young audiences about nutrition through interactive trivia. Features custom-made sprites, AI-generated questions, and an engaging point system to make learning about healthy eating fun and accessible.",
     technologies: ["Java", "OpenAI API", "JPanel"],
     github: "https://github.com/ryan-c07/ai-flashcards",
   },
@@ -218,7 +137,7 @@ export default function Home() {
           >
             Skills & Technologies
           </motion.h2>
-          <AnimatedSkills skills={skills} />
+          <AnimatedSkills />
         </motion.section>
 
         {/* Featured Projects */}

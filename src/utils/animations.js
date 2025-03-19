@@ -65,11 +65,11 @@ export const slideIn = {
 export const navVariants = {
   hidden: {
     opacity: 0,
-    y: -50,
+    y: -100,
     transition: {
       type: 'spring',
-      stiffness: 300,
-      damping: 140,
+      stiffness: 100,
+      damping: 20,
     },
   },
   show: {
@@ -77,8 +77,9 @@ export const navVariants = {
     y: 0,
     transition: {
       type: 'spring',
-      stiffness: 80,
-      delay: 0.1,
+      stiffness: 100,
+      damping: 20,
+      duration: 0.6,
     },
   },
 }; 
